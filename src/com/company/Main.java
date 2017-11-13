@@ -46,5 +46,6 @@ public class Main {
 
 
         System.out.println("aretes: "+outils.getAretes(mots4)+", sommets"+ mots4.size());
+        System.out.println(outils.nbSansVoisins(mots4));
     }
 }

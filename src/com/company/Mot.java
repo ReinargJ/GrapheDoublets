@@ -6,6 +6,7 @@ import java.util.List;
 public class Mot {
     String mot;
     List<Mot> successeurs;
+    Boolean visited= false;
 
     public Mot(String mot) {
         this.mot = mot;

@@ -3,6 +3,7 @@ package com.company;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Outils {
     public File getFile(String fileName) {
@@ -58,18 +59,45 @@ public class Outils {
         return sum;
     }
 
-//    public  void ParCoursEnLargeur(Mot mot)
-//    {
-//        //System.out.print(node.data + " ");
-//        List<Mot> successeurs=node.getNeighbours();
-//        for (int i = 0; i < neighbours.size(); i++) {
-//            Node n=neighbours.get(i);
-//            if(n!=null && !n.visited)
-//            {
-//                dfs(n);
-//                n.visited=true;
-//
-//            }
-//        }
-//    }
+    public void ParCoursEnLargeur(Mot mot)
+    {
+        //System.out.print(node.data + " ");
+        List<Mot> successeurs=mot.getSuccesseurs();
+        for (int i = 0; i < successeurs.size(); i++) {
+            Mot m=successeurs.get(i);
+            if(m!=null && !m.visited)
+           {
+               ParCoursEnLargeur(m);
+                m.visited=true;
+            }
+        }
+    }
+
+    public int nbSansVoisins(ArrayList<Mot> mots){
+        int sum = 0;
+
+        int size = mots.size();
+        HashMap<String, Mot> sansSuccesseurs = new HashMap<>();
+
+
+        for(int i = 0; i<size; i++){
+            Mot mot = mots.get(i);
+
+            if(mot.successeurs.isEmpty()){
+                sansSuccesseurs.put(mot.mot, mot);
+            }
+        }
+
+        HashMap<String, Mot> finalList = new HashMap<>(sansSuccesseurs);
+        for(HashMap.Entry<String, Mot> entry : sansSuccesseurs.entrySet()) {
+            String key = entry.getKey();
+            Mot mot = entry.getValue();
+            for(int i = 0; i<size; i++) {
+             if(mots.get(i).successeurs.contains(mot)){
+                    finalList.remove(mot.mot);
+             }
+            }
+        }
+        return finalList.size();
+    }
 }
