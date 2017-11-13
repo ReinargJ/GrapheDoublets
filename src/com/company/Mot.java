@@ -15,6 +15,19 @@ public class Mot {
     public void AddSuccesseur(Mot mot){
         this.successeurs.add(mot);
     }
+    public boolean isSuccessor(String firstMot){
+        int diff = 0;
 
+        for (int i=0; i<this.mot.length(); i++){
+            if(this.mot.charAt(i) != firstMot.charAt(i)){
+                diff++;
+            }
+        }
 
+        return (diff==1);
+    }
+
+    public List<Mot> getSuccesseurs() {
+        return successeurs;
+    }
 }
